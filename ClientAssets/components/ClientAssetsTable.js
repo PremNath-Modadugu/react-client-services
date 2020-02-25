@@ -36,3 +36,5 @@ const ClientAssetsTable = ({clientAssets}) => {
     </div>
   )
 } 
+
+export default ClientAssetsTable;

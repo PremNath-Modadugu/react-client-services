@@ -4,6 +4,8 @@
   
 import ClientAssestServices from './services/ClientAssestServices';
 import ClientAssestHelpers from './services/ClientAssestHelpers';
+import ClientAssetsTable from './Component/ClientAssetsTable';
+
 
 class ClientAssets extends React.Component {
 constructor(props) {
@@ -65,7 +67,7 @@ loadAssets = () =>{
           )
         }
         {/* Display client assets data */}
-        
+        <ClientAssetsTable clientAssets = {clientAssets} />
       </div>
     )
   }
