@@ -13,9 +13,22 @@
  * returns []
  */
  
-funtion formatData(clientData) {
-	if (clientData.status === 200){
-  	return clientData.data;
+function formatData(clientData){
+	if (clientData && clientData.status === 200){
+    if (clientData.data && Array.isArray(clientData.data)) {
+      let data = [];
+      data = clientData.data.map(item => {
+        return {
+          date: new Date("YYMMDD",item.timestamp),
+          name: item.name,
+          age: item.age,
+          region: item.region,
+          message: item.message,
+          time: new Date("HHMMSS",item.timestamp)
+        }
+      })
+      return data;
+    }
   }
   return [];
 }
