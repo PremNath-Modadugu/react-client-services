@@ -25,15 +25,11 @@ componentDidUpdate(){
 loadAssets = () =>{
 
   let params = {
-  region: 'us-west'
+    region: 'us-west'
   }
+
   this.setState({loading: true});
   ClientAssestServices.getClientAssets(params).then(res => {
-  	/*
-      if (res.status === 'ok'){
-        return res.data
-      }
-    */
 		this.setState({clientAssets:ClientAssestHelpers.formatData(res)});
   })
   .catch((errorResponse)=>{
@@ -43,7 +39,6 @@ loadAssets = () =>{
     this.setState({loading: false});
   })
 }
-  
   
   render() {
     let { loading, error, clientAssets }  = this.state;

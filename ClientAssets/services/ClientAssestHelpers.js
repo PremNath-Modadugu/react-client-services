@@ -14,8 +14,8 @@
  */
  
 function formatData(clientData){
-	if (clientData && clientData.status === 200){
-    if (clientData.data && Array.isArray(clientData.data)) {
+	if (clientData && clientData.data){
+    if ( clientData.data.items && Array.isArray(clientData.data.items)) {
       let data = [];
       data = clientData.data.map(item => {
         return {
