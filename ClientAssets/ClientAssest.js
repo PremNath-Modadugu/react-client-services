@@ -1,4 +1,4 @@
-Component : ClientAssest.js
+// Component : ClientAssest.js
 //- - - - - - - - - - - - - - - - - -
   
   
@@ -9,10 +9,14 @@ class ClientAssets extends React.Component {
 constructor(props) {
   super(props);
   this.state = {
-    loading: false,
+    loading: true,
     error: false,
     clientAssets : []
   };
+}
+
+componentDidUpdate(){
+  this.loadAssets();
 }
 
 
@@ -21,34 +25,48 @@ loadAssets = () =>{
   let params = {
   region: 'us-west'
   }
-
-  ClientAssestServices.getClientAssets(params).then(
-  res => {
+  this.setState({loading: true});
+  ClientAssestServices.getClientAssets(params).then(res => {
   	/*
       if (res.status === 'ok'){
         return res.data
       }
     */
-    
 		this.setState({clientAssets:ClientAssestHelpers.formatData(res)});
-  
-  } 
-  )
+  })
   .catch((errorResponse)=>{
   	this.setState({clientAssets:ClientAssestHelpers.formatError(err)});   
-    
-	}
-
+	})
+  .finally(() => {
+    this.setState({loading: false});
+  })
 }
   
   
   render() {
-  return (
-  <div>
-  
-  </div>
-  
-  )
+    let { loading, error, clientAssets }  = this.state;
+    return (
+      <div>
+      
+        {/* display a loading bar when the data is pending */}
+        {
+          loading && (
+            <div>
+              loading...
+            </div>
+          )
+        }
+        {/* display Error */}
+        {
+          error && (
+            <div>
+              Error!
+            </div> 
+          )
+        }
+        {/* Display client assets data */}
+        
+      </div>
+    )
   }
-  
-  }
+}
